@@ -3,6 +3,6 @@ Kinopic's Python Book
 
 .. toctree::
     :maxdepth: 4
-    :caption: Contents:
+    :caption: 目录 
 
     chapters/introduction.rst
