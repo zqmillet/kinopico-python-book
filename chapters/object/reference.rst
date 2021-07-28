@@ -9,5 +9,5 @@
    :linenos:
 
 .. output_of_code:: /examples/object/reference/demo1.py
+   :linenos:
 
-   fjskdfjdsjfj
