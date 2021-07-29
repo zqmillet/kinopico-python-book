@@ -11,6 +11,7 @@ Kinopic's Python Book
 .. toctree::
     :maxdepth: 4
     :caption: 对象
+    :numbered:
 
     chapters/object/explicit_type.rst
     chapters/object/reference.rst
@@ -18,8 +19,13 @@ Kinopic's Python Book
     chapters/object/first_class_public.rst
 
 .. toctree::
+
+.. 解包
+
+.. toctree::
     :maxdepth: 4
     :caption: 导入
+    :numbered:
 
     chapters/import/what_happened.rst
     chapters/import/lazy_import.rst

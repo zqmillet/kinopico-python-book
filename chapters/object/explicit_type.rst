@@ -1,3 +1,5 @@
+.. _section_implicit_type:
+
 经典的误解
 ==========
 

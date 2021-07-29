@@ -9,6 +9,7 @@ from sphinx.directives.code import CodeBlock
 class IncludeCodeFile(LiteralInclude):
     def run(self):
         file_path, *_ = self.arguments
+        self.arguments[:] = ['/' + file_path]
         self.options['caption'] = f'source code of ``{file_path.strip("/")}``'
         return super().run()
     

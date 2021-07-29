@@ -1,15 +1,29 @@
 author = 'kinopico'
 project = 'kinopico\'s python book'
 
+extensions = [
+    'extensions.codeblock',
+]
+
 html_theme = 'sphinx_rtd_theme'
-extensions = ['extensions.codeblock']
+html_favicon = './static/kinopico.png'
+html_codeblock_linenos_style = 'table'
 
 source_suffix = ['.rst']
-html_codeblock_linenos_style = 'table'
+
+numfig = True
+numfig_format = {
+    'code-block': '代码 %s',
+    'section': '章节 %s'
+}
 
 rst_prolog = '''
 .. role:: py(code)
    :language: py
+   :class: highlight
+
+.. role:: sh(code)
+   :language: console
    :class: highlight
 '''
 
