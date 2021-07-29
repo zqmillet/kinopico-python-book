@@ -4,6 +4,7 @@ Kinopic's Python Book
 .. toctree::
     :maxdepth: 4
     :caption: 序言
+    :numbered:
 
     chapters/introductions/first.rst
     chapters/introductions/second.rst

@@ -2,3 +2,9 @@
 ====
 
 如果你是 python 的新手, 不建议直接阅读此书, 因为我行文的过程中, 会假设读者拥有一定的 python 开发经验, 所以会略过一些比较基础的内容.
+
+笔者使用的 python 版本信息如下所示.
+
+.. include_code_file:: examples/introductions/second/show_version.py
+
+.. output_of_code:: examples/introductions/second/show_version.py
