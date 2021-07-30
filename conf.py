@@ -3,6 +3,7 @@ project = 'kinopico\'s python book'
 
 extensions = [
     'extensions.codeblock',
+    'sphinx.ext.graphviz'
 ]
 
 html_theme = 'sphinx_rtd_theme'
