@@ -24,8 +24,3 @@ print(output.decode('utf8'))
 process = subprocess.Popen(['pdflatex', '-v'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 output, _ = process.communicate()
 print(output.decode('utf8'))
-
-
-process = subprocess.Popen(['pdf2svg', '-v'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-output, _ = process.communicate()
-print(output.decode('utf8'))
