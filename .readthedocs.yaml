@@ -3,7 +3,7 @@ version: 2
 build:
   image: latest
   apt_packages:
-    - svg2pdf
+    - pdf2svg
 
 python:
   version: 3.8
