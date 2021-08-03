@@ -18,3 +18,12 @@ python 中的函数之所以是一等公民, 是因为 python 中的一切都是
 
 :py:`import pdb; pdb.set_trace()`
 
+.. tikz:: An Example TikZ Directive with Caption
+      :align: left
+
+    
+    \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
+    \draw (-1.5,0) -- (1.5,0);
+    \draw (0,-1.5) -- (0,1.5) node[] {\texttt{import pdb}};
+    \draw (0,0) circle [radius=1cm];
+    \draw (3mm,0mm) arc [start angle=0, end angle=30, radius=3mm];

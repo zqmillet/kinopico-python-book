@@ -3,6 +3,8 @@ import os
 import shutil
 import contextlib
 import subprocess
+from sphinx.directives.code import LiteralInclude
+from sphinx.util.docutils import SphinxDirective
 
 def code_to_svg(code, file_path):
     file_path = os.path.abspath(file_path)
@@ -42,3 +44,23 @@ def temporary_directory(directory=None):
     yield directory
     os.chdir(current_directory)
     shutil.rmtree(directory)
+
+class Tikz(SphinxDirective):
+    has_content = True
+
+    def run(self):
+        svg_path = 'main.svg'
+        code_to_svg('\n'.join(self.content), svg_path)
+        # file_path, *_ = self.arguments
+        # self.arguments[:] = ['/' + file_path]
+        # self.options['caption'] = f'source code of ``{file_path.strip("/")}``'
+        return super().run()
+
+def setup(app):
+    app.add_directive("tikz", Tikz)
+
+    return {
+        'version': '0.1',
+        'parallel_read_safe': True,
+        'parallel_write_safe': True,
+    }

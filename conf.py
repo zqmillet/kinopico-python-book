@@ -3,6 +3,7 @@ project = 'kinopico\'s python book'
 
 extensions = [
     'extensions.codeblock',
+    'sphinxcontrib.tikz',
     'sphinx.ext.graphviz',
 ]
 
