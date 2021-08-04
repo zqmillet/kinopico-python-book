@@ -1,3 +1,5 @@
+import os
+
 author = 'kinopico'
 project = 'kinopico\'s python book'
 
@@ -31,3 +33,12 @@ rst_prolog = '''
    :class: highlight
 '''
 
+tikz_latex_preamble = r'''
+\usepackage{{ctex}}
+\setmainfont[Path={current_directory}/fonts/pingfang/, UprightFont=*_regular, BoldFont=*_bold]{{pingfang}}
+\setCJKmainfont[Path={current_directory}/fonts/pingfang/, UprightFont=*_regular, BoldFont=*_bold]{{pingfang}}
+\setmonofont[Path={current_directory}/fonts/spacemono/, UprightFont=*_regular, BoldFont=*_bold]{{spacemono}}
+'''.format(current_directory=os.path.abspath(os.curdir))
+tikz_tikzlibraries='positioning'
+
+latex_engine = 'xelatex'

@@ -16,14 +16,7 @@
 
 python 中的函数之所以是一等公民, 是因为 python 中的一切都是对象, 即 *everything in python is an object*. 换句话说:  python 中函数是一等公民这一现象是 python 一切皆对象的必然结果.
 
-:py:`import pdb; pdb.set_trace()`
-
 .. tikz:: An Example TikZ Directive with Caption
       :align: left
 
-    
-    \draw[step=.5cm,gray,very thin] (-1.4,-1.4) grid (1.4,1.4);
-    \draw (-1.5,0) -- (1.5,0);
-    \draw (0,-1.5) -- (0,1.5) node[] {\texttt{import pdb}};
-    \draw (0,0) circle [radius=1cm];
-    \draw (3mm,0mm) arc [start angle=0, end angle=30, radius=3mm];
+    \node[rectangle, draw=blue, line width=1pt] (a) at (0, 0) {苟利国家生死以, qinyinhuofubiquzhi};
