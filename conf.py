@@ -37,8 +37,16 @@ tikz_latex_preamble = r'''
 \usepackage{{ctex}}
 \setmainfont[Path={current_directory}/fonts/pingfang/, UprightFont=*_regular, BoldFont=*_bold]{{pingfang}}
 \setCJKmainfont[Path={current_directory}/fonts/pingfang/, UprightFont=*_regular, BoldFont=*_bold]{{pingfang}}
-\setmonofont[Path={current_directory}/fonts/spacemono/, UprightFont=*_regular, BoldFont=*_bold]{{spacemono}}
+\setmonofont[Path={current_directory}/fonts/sfmono/, UprightFont=*_regular, BoldFont=*_bold]{{sfmono}}
 '''.format(current_directory=os.path.abspath(os.curdir))
+
+tikz_latex_preamble += r'''
+\tikzset{
+    reference/.style = {draw=black, rectangle, line width=1pt, minimum width = 1cm, minimum height = 1cm, font=\tt},
+    object/.style = {draw=green, rectangle, line width=1pt, minimum width = 1cm, minimum height = 1cm, font=\tt},
+}
+'''
+
 tikz_tikzlibraries='positioning'
 
 latex_engine = 'xelatex'
