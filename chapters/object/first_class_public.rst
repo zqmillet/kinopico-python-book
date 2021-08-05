@@ -19,3 +19,10 @@ python 中的函数之所以是一等公民, 是因为 python 中的一切都是
 .. tikz:: 图片测试
 
     \node[reference] (a) at (0, 0) {a};
+    \node[reference] (b) at (0, -1) {b};
+
+    \node[object] (o1) at (3, 0) {1};
+    \node[code] at (o1.east) {a = 1};
+
+    \draw[ref] (a) -- (o1);
+    \draw[ref] (b) -- (o1);

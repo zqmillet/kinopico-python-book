@@ -42,8 +42,10 @@ tikz_latex_preamble = r'''
 
 tikz_latex_preamble += r'''
 \tikzset{
-    reference/.style = {draw=black, rectangle, line width=1pt, minimum width = 1cm, minimum height = 1cm, font=\tt},
-    object/.style = {draw=green, rectangle, line width=1pt, minimum width = 1cm, minimum height = 1cm, font=\tt},
+    reference/.style = {draw=black, rectangle, line width=1pt, minimum width=1cm, minimum height=1cm, font=\tt},
+    object/.style = {fill=green!90!black, rectangle, line width=1pt, minimum width=1cm, minimum height=1cm, font=\tt},
+    code/.style = {font=\tt, anchor=west},
+    ref/.style = {line width=1pt, ->}
 }
 '''
 
