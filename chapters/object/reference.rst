@@ -19,6 +19,18 @@
 
 我们可以发现, 第二个结果也是 :py:`True`. 这说明, 当执行 :py:`b = a` 时, 并不是将 :py:`a` 的值赋给新的变量 :py:`b`, 而是将引用符号 :py:`b` 的地址指向了引用符号 :py:`a` 所指向的内容. 所以, :py:`a` 和 :py:`b` 的地址是一样的.
 
+.. tikz:: 符号与地址
+
+    \node[reference] (a) at (0, 1) {a};
+    \node[reference] (b) at (0, 0) {b};
+
+    \node[object] (o1)   at (3, 1) {1};
+    \node[code]          at (4, 1) {a = 1};
+    \node[code]          at (4, 0) {b = a};
+
+    \draw[ref] (a) -- (o1);
+    \draw[ref] (b) -- (o1);
+
 如果 :py:`a` 的地址和 :py:`b` 的地址是一样的, 我们修改 :py:`a` 的值, 那么 :py:`b` 会随着变化吗? 读者可以思考一下\ :numref:`change_value_code` 运行的结果是什么.
 
 .. _change_value_code:
