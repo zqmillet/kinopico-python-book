@@ -20,6 +20,7 @@ source_suffix = ['.rst']
 numfig = True
 numfig_format = {
     'code-block': '代码 %s',
+    'figure': '图 %s',
     'section': '章节 %s'
 }
 
@@ -41,10 +42,13 @@ tikz_latex_preamble = r'''
 '''.format(current_directory=os.path.abspath(os.curdir))
 
 tikz_latex_preamble += r'''
+\definecolor{reference}{rgb}{0.63, 0.79, 0.95}
+\definecolor{object}{rgb}{0.66, 0.89, 0.63}
 \tikzset{
-    reference/.style = {draw=black, rectangle, line width=1pt, minimum width=0.9cm, minimum height=0.9cm, font=\tt},
-    object/.style = {fill=green!40!black, rectangle, line width=1pt, minimum width=0.9cm, minimum height=0.9cm, font=\tt, text=white},
-    code/.style = {font=\tt, anchor=west},
+    reference/.style = {fill=reference, rectangle, line width=1pt, minimum width=0.9cm, minimum height=0.9cm, font=\tt\footnotesize},
+    object/.style = {fill=object, rectangle, line width=1pt, minimum width=0.9cm, minimum height=0.9cm, font=\tt\footnotesize},
+    code/.style = {font=\tt\footnotesize, anchor=west},
+    plaintext/.style = {font=\footnotesize\bf, anchor=base},
     ref/.style = {line width=1pt, ->}
 }
 '''

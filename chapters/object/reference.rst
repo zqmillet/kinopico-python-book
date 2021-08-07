@@ -19,14 +19,20 @@
 
 我们可以发现, 第二个结果也是 :py:`True`. 这说明, 当执行 :py:`b = a` 时, 并不是将 :py:`a` 的值赋给新的变量 :py:`b`, 而是将引用符号 :py:`b` 的地址指向了引用符号 :py:`a` 所指向的内容. 所以, :py:`a` 和 :py:`b` 的地址是一样的.
 
-.. tikz:: 符号与地址
+如\ :numref:`symbol_and_objects_1` 所示, 蓝色的是引用符号, 绿色的是内存中的对象. 当执行 :py:`b = a` 的时候, 并没有重新构造一个 :py:`1` 的对象, 而是直接把 :py:`a` 所指的对象赋给了 :py:`b`.
 
-    \node[reference] (a) at (0, 1) {a};
-    \node[reference] (b) at (0, 0) {b};
+.. _symbol_and_objects_1:
 
-    \node[object] (o1)   at (3, 1) {1};
-    \node[code]          at (4, 1) {a = 1};
-    \node[code]          at (4, 0) {b = a};
+.. tikz:: 符号与对象
+
+    \node[reference] (a)  at (0, 1.0) {a};
+    \node[reference] (b)  at (0, 0.0) {b};
+    \node[object]    (o1) at (3, 1.0) {1};
+    \node[code]           at (4, 0.0) {>>> b = a};
+    \node[code]           at (4, 1.0) {>>> a = 1};
+    \node[plaintext]      at (0, 1.7) {symbol};
+    \node[plaintext]      at (3, 1.7) {object};
+    \node[plaintext]      at (5, 1.7) {code};
 
     \draw[ref] (a) -- (o1);
     \draw[ref] (b) -- (o1);
