@@ -11,11 +11,9 @@
 
 .. include_code_file:: examples/object/reference/assignment_of_int.py
 
-相等自不必说, 第一个输出必然是 :py:`True`, 问题是第二个也是 :py:`True` 吗? 我们可以看一下这段代码的运行结果, 如\ :numref:`assignment_of_int_output` 所示.
+相等自不必说, 第一个输出必然是 :py:`True`, 问题是第二个也是 :py:`True` 吗? 我们可以看一下这段代码的运行结果, 如下所示.
 
-.. _assignment_of_int_output:
-
-.. output_of_code:: examples/object/reference/assignment_of_int.py
+.. python:: examples/object/reference/assignment_of_int.py
 
 我们可以发现, 第二个结果也是 :py:`True`. 这说明, 当执行 :py:`b = a` 时, 并不是将 :py:`a` 的值赋给新的变量 :py:`b`, 而是将引用符号 :py:`b` 的地址指向了引用符号 :py:`a` 所指向的内容. 所以, :py:`a` 和 :py:`b` 的地址是一样的.
 
@@ -43,11 +41,9 @@
 
 .. include_code_file:: examples/object/reference/change_reference_value.py
 
-由于 :py:`a` 和 :py:`b` 指向同一个对象的地址, 修改 :py:`a` 的值, 那么 :py:`b` 的值也一定会发生更改, 因此, 此时输出 :py:`b` 的值应该是 :py:`2`. 然而事实上, 从\ :numref:`change_value_output` 的执行结果显示 :py:`b` 的值并没有发生变化. 这好像跟之前说的不太一样?
+由于 :py:`a` 和 :py:`b` 指向同一个对象的地址, 修改 :py:`a` 的值, 那么 :py:`b` 的值也一定会发生更改, 因此, 此时输出 :py:`b` 的值应该是 :py:`2`. 然而事实上, 从如下显示的执行结果显示 :py:`b` 的值并没有发生变化. 这好像跟之前说的不太一样?
 
-.. _change_value_output:
-
-.. output_of_code:: examples/object/reference/change_reference_value.py
+.. python:: examples/object/reference/change_reference_value.py
 
 这个结果跟之前表述的观点并不矛盾, 原因在于, 当执行 :py:`a = 2` 时, 不是将 :py:`a` 所指的对象的值改为 :py:`2`, 而是将引用符号 :py:`a` 指向新的对象 :py:`2` 上了, 此时 :py:`b` 所指的对象仍然是 :py:`1`.
 
@@ -61,11 +57,9 @@
 
 .. include_code_file:: examples/object/reference/change_list.py
 
-输出结果如\ :numref:`change_list_output` 所示, 有没有跟你想的不一样呢?
+输出结果如下所示, 有没有跟你想的不一样呢?
 
-.. _change_list_output:
-
-.. output_of_code:: examples/object/reference/change_list.py
+.. python:: examples/object/reference/change_list.py
 
 你会有这种疑问吗: :py:`a[0]` 的值指向了一个新的字符串, 为什么 :py:`b[0]` 的值也跟着变化了?
 

@@ -35,8 +35,39 @@ class Bash(Raw):
         self.content[0] = f'<div class="highlight", style="background-color:#F8F8F8;">{html}</div>'
         return super().run()
 
+class Python(Raw):
+    has_content = True
+    required_arguments = 0
+
+    option_spec = {
+        'norun': directives.flag,
+        'real_cmd': directives.unchanged,
+    }
+
+    variables = {
+        'python': sys.executable
+    }
+
+    def run(self):
+        self.arguments[:] = ['html']
+
+        norun = 'norun' in self.options
+        display_command = 'python ' + '\n'.join(self.content).strip()
+        real_command = sys.executable + ' ' + '\n'.join(self.content).strip()
+        convertor = Ansi2HTMLConverter(dark_bg=True)
+
+        if not norun:
+            output = spawn(real_command, env={'TERM': 'screen', 'COLORTERM': 'truecolor', 'COLORFGBG': '7;0'}).read()
+            html = convertor.convert(f'{Style.BRIGHT}{Fore.RED}${Fore.BLACK} {display_command}{Fore.RESET}{Style.RESET_ALL}\n{output.decode("utf8").strip()}')
+        else:
+            html = convertor.convert(f'{Style.BRIGHT}{Fore.RED}${Fore.BLACK} {display_command}{Fore.RESET}{Style.RESET_ALL}')
+
+        self.content[0] = f'<div class="highlight", style="background-color:#F8F8F8;">{html}</div>'
+        return super().run()
+
 def setup(app):
     app.add_directive('bash', Bash)
+    app.add_directive('python', Python)
     return {
         'version': '0.1',
         'parallel_read_safe': True,
