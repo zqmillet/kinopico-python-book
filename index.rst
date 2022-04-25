@@ -37,3 +37,4 @@ Kinopic's Python Book
     :caption: 附录
 
     chapters/appendix/implicit_conversion.rst
+    chapters/appendix/can_i_define_a_constant.rst

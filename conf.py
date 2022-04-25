@@ -5,17 +5,22 @@ project = 'kinopico\'s python book'
 
 extensions = [
     'extensions.codeblock',
+    'extensions.bash',
     'sphinxcontrib.tikz',
     'sphinx.ext.graphviz',
 ]
 
 html_theme = 'sphinx_rtd_theme'
-html_favicon = './static/kinopico.png'
+html_favicon = './_static/kinopico.png'
 html_codeblock_linenos_style = 'table'
 
 graphviz_output_format = 'svg'
 graphviz_dot_args = ['-Nfontsize=10', '-Efontsize=10', '-Kneato']
 source_suffix = ['.rst']
+
+html_static_path = ['_static']
+
+html_css_files = ['style.css']
 
 numfig = True
 numfig_format = {

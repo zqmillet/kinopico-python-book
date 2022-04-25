@@ -4,15 +4,16 @@ from docutils import nodes
 from docutils.parsers.rst import Directive
 from docutils.statemachine import StringList
 from sphinx.directives.code import LiteralInclude
-from sphinx.directives.code import CodeBlock 
+from sphinx.directives.code import CodeBlock
 
 class IncludeCodeFile(LiteralInclude):
     def run(self):
         file_path, *_ = self.arguments
         self.arguments[:] = ['/' + file_path]
-        self.options['caption'] = f'source code of ``{file_path.strip("/")}``'
+        self.options['caption'] = f':py:obj:`{file_path.strip("/")}`'
+        self.options['linenos'] = True
         return super().run()
-    
+
 class OutputOfCode(CodeBlock):
     def run(self):
         self.content = StringList([''])

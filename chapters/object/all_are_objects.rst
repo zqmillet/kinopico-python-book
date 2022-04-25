@@ -27,8 +27,12 @@
 
 .. output_of_code:: examples/object/all_are_objects/class_is_object.py
 
-那函数也是对象? 必须的!
+有的人会有疑问: 那函数也是对象? 必须的!
 
 .. include_code_file:: examples/object/all_are_objects/function_is_object.py
 
 .. output_of_code:: examples/object/all_are_objects/function_is_object.py
+
+.. admonition:: 深度思考
+
+    可否实现一个对象 :py:`obj`, 使得 :py:`isinstance(obj, object)` 的值是 :py:`False`?
