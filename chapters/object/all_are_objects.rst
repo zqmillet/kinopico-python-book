@@ -9,13 +9,13 @@
 
 .. _members_of_int_code:
 
-.. include_code_file:: examples/object/all_are_objects/members_of_int.py
+.. code_file:: examples/object/all_are_objects/members_of_int.py
 
-:numref:`members_of_int_code` 的执行结果如\ :numref:`members_of_int_output` 所示.
+:numref:`members_of_int_code` 的执行结果如下所示.
 
 .. _members_of_int_output:
 
-.. output_of_code:: examples/object/all_are_objects/members_of_int.py
+.. python:: examples/object/all_are_objects/members_of_int.py
 
 从上面这个例子我们可以看出来, 简单如整数 :py:`int`, 在 Python 中都是对象.
 
@@ -23,15 +23,15 @@
 
 是的!
 
-.. include_code_file:: examples/object/all_are_objects/class_is_object.py
+.. code_file:: examples/object/all_are_objects/class_is_object.py
 
-.. output_of_code:: examples/object/all_are_objects/class_is_object.py
+.. python:: examples/object/all_are_objects/class_is_object.py
 
 有的人会有疑问: 那函数也是对象? 必须的!
 
-.. include_code_file:: examples/object/all_are_objects/function_is_object.py
+.. code_file:: examples/object/all_are_objects/function_is_object.py
 
-.. output_of_code:: examples/object/all_are_objects/function_is_object.py
+.. python:: examples/object/all_are_objects/function_is_object.py
 
 .. admonition:: 深度思考
 

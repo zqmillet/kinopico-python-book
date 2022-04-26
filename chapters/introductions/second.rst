@@ -5,6 +5,6 @@
 
 笔者使用的 Python 版本信息如下所示.
 
-.. include_code_file:: examples/introductions/second/show_version.py
+.. code_file:: examples/introductions/second/show_version.py
 
-.. output_of_code:: examples/introductions/second/show_version.py
+.. python:: examples/introductions/second/show_version.py

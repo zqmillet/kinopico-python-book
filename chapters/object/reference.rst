@@ -9,7 +9,7 @@
 
 .. _assignment_of_int_code:
 
-.. include_code_file:: examples/object/reference/assignment_of_int.py
+.. code_file:: examples/object/reference/assignment_of_int.py
 
 相等自不必说, 第一个输出必然是 :py:`True`, 问题是第二个也是 :py:`True` 吗? 我们可以看一下这段代码的运行结果, 如下所示.
 
@@ -39,7 +39,7 @@
 
 .. _change_value_code:
 
-.. include_code_file:: examples/object/reference/change_reference_value.py
+.. code_file:: examples/object/reference/change_reference_value.py
 
 由于 :py:`a` 和 :py:`b` 指向同一个对象的地址, 修改 :py:`a` 的值, 那么 :py:`b` 的值也一定会发生更改, 因此, 此时输出 :py:`b` 的值应该是 :py:`2`. 然而事实上, 从如下显示的执行结果显示 :py:`b` 的值并没有发生变化. 这好像跟之前说的不太一样?
 
@@ -55,7 +55,7 @@
 
 .. _change_list_code:
 
-.. include_code_file:: examples/object/reference/change_list.py
+.. code_file:: examples/object/reference/change_list.py
 
 输出结果如下所示, 有没有跟你想的不一样呢?
 
