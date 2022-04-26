@@ -1,10 +1,4 @@
-import sys
-import subprocess
-from docutils import nodes
-from docutils.parsers.rst import Directive
-from docutils.statemachine import StringList
 from sphinx.directives.code import LiteralInclude
-from sphinx.directives.code import CodeBlock
 
 class CodeFile(LiteralInclude):
     def run(self):
