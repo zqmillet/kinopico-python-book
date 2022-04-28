@@ -1,3 +1,3 @@
 @import "css/theme.css";
 
-.rst-content .code-block-caption .caption-text .rst-content .figure .rst-content {font-style: normal;}
+.rst-content .code-block-caption {font-style: normal;}
