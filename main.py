@@ -1,10 +1,17 @@
 from pexpect import spawn
 from sys import executable
-from time import sleep
 
-child = spawn(executable, timeout=1)
-child.sendline('print(23333)\n')
-print(child.before)
-import pdb; pdb.set_trace()
-child.sendline('exit()\n')
-print(child.before)
+code = '''
+a = 1000
+b = 1000
+print(a is b)
+for i in range(10):
+    print(i)
+
+exit()
+'''
+
+child = spawn(executable)
+for line in code.strip().splitlines():
+    child.sendline(line)
+print(child.read().decode().replace('\r', '').replace(code, '\n').strip())
