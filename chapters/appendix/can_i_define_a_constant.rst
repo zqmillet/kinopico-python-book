@@ -7,7 +7,7 @@
 
 .. code_file:: examples/appendix/define_a_constant.py
 
-.. python::  examples/appendix/define_a_constant.py
+.. python:: examples/appendix/define_a_constant.py
 
 我们可以看出, 当给 :py:obj:`CONST.PI` 赋值时, 会抛出我们定义好的异常, 从而实现了某种意义上的常量.
 
