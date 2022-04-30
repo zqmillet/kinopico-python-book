@@ -1,4 +1,5 @@
 import os
+import platform
 
 author = 'kinopico'
 project = 'kinopico\'s python book'
@@ -37,6 +38,11 @@ rst_prolog = '''
 .. role:: sh(code)
    :language: console
    :class: highlight
+'''
+
+rst_epilog = f'''
+.. |python_version| replace:: {platform.python_version()}
+.. |os| replace:: {platform.system()}
 '''
 
 tikz_latex_preamble = r'''

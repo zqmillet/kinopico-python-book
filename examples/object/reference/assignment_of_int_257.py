@@ -1,5 +1,5 @@
-a = []
-b = a
+a = 257
+b = 257
 
 if a is b:
     print('a is b')

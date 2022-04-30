@@ -1,9 +1,17 @@
-import sys
+from sys import executable
 from docutils.parsers.rst.directives.misc import Raw
 from docutils.parsers.rst import directives
 from ansi2html import Ansi2HTMLConverter
 from colorama import Style, Fore
 from pexpect import spawn
+
+def get_interactive_result(code):
+    child = spawn(executable, encoding='utf8')
+    for line in code.strip().splitlines():
+        child.sendline(line)
+
+    output = child.read().replace('\r', '')
+    return output.replace('\n' + code, '').strip()
 
 class Bash(Raw):
     has_content = True
@@ -15,7 +23,7 @@ class Bash(Raw):
     }
 
     variables = {
-        'python': sys.executable
+        'python': executable
     }
 
     def run(self):
@@ -45,7 +53,7 @@ class Python(Raw):
     }
 
     variables = {
-        'python': sys.executable
+        'python': executable
     }
 
     def run(self):
@@ -53,7 +61,7 @@ class Python(Raw):
 
         norun = 'norun' in self.options
         display_command = 'python ' + '\n'.join(self.content).strip()
-        real_command = sys.executable + ' ' + '\n'.join(self.content).strip()
+        real_command = executable + ' ' + '\n'.join(self.content).strip()
         convertor = Ansi2HTMLConverter(dark_bg=True)
 
         if not norun:
@@ -65,9 +73,29 @@ class Python(Raw):
         self.content[0] = f'<div class="highlight", style="background-color:#F8F8F8;">{html}</div>'
         return super().run()
 
+class Interpreter(Raw):
+    has_content = True
+    required_arguments = 0
+
+    def run(self):
+        self.arguments[:] = ['html']
+
+        display_command = 'python'
+        convertor = Ansi2HTMLConverter(dark_bg=True)
+
+        code = '\n'.join(self.content).strip()
+        output = get_interactive_result(code)
+        html = convertor.convert(f'{Style.BRIGHT}{Fore.RED}${Fore.BLACK} {display_command}{Fore.RESET}{Style.RESET_ALL}\n{output}')
+
+        self.content[0] = f'<div class="highlight", style="background-color:#F8F8F8;">{html}</div>'
+        self.content[:] = self.content[:1]
+        return super().run()
+
 def setup(app):
     app.add_directive('bash', Bash)
     app.add_directive('python', Python)
+    app.add_directive('interpreter', Interpreter)
+
     return {
         'version': '0.1',
         'parallel_read_safe': True,
