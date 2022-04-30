@@ -123,8 +123,18 @@
 
 整个过程中, 对象的类型没有任何隐式或者显式的转换. 因此, 再次重申: Python 是一门强类型语言.
 
-有什么证据吗?
+有人要问, 你讲了这么多, 有什么证据吗? 有的, 我们通过分析 Python 字节码的反汇编就可以看出 Python 底层的运行逻辑. 以下两段代码分别是 Python 源代码以及对应的反汇编.
 
-.. dis:: examples/object/reference/change_reference_value.py
+.. code_file:: examples/object/reference/assignments.py
 
-可以定义一个常量吗?
+.. dis:: examples/object/reference/assignments.py
+
+其中:
+
+- :py:`LOAD_CONST` 用于构造一个整数,
+- :py:`LOAD_NAME` 用于从名字中加载对象,
+- :py:`STORE_NAME` 用于给一个对象起名字.
+
+.. admonition:: 思考题
+
+    在 Python 中, 可以定义一个常量吗? 即不可以修改的变量.

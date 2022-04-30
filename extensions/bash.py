@@ -9,6 +9,8 @@ from contextlib import contextmanager
 from colorama import Style, Fore
 from pexpect import spawn
 from textwrap import dedent
+from sphinx.directives.code import CodeBlock
+from docutils.statemachine import StringList
 
 def get_interactive_result(code):
     child = spawn(executable, encoding='utf8')
@@ -73,25 +75,21 @@ def stdout():
     yield string
     sys.stdout = origin_stdout
 
-class Dis(Raw):
+class Dis(CodeBlock):
     has_content = True
     required_arguments = 0
 
     def run(self):
-        self.arguments[:] = ['html']
-
-        with open(self.content[0], 'r', encoding='utf8') as file:
+        file_path = self.arguments[0]
+        with open(file_path, 'r', encoding='utf8') as file:
             code = file.read()
 
         with stdout() as string:
             dis(code)
 
-        display_command = 'python ' + '\n'.join(self.content).strip()
-        convertor = Ansi2HTMLConverter(dark_bg=True)
-
-        html = convertor.convert(dedent(string.getvalue()).strip())
-
-        self.content[0] = f'<div class="highlight", style="background-color:#F8F8F8;">{html}</div>'
+        self.arguments[:] = ['text']
+        self.content = StringList(string.getvalue().splitlines())
+        self.options['caption'] = f':py:obj:`{file_path}` 字节码的反汇编'
         return super().run()
 
 class Interpreter(Raw):
