@@ -1,9 +1,14 @@
+import sys
 from sys import executable
+from dis import dis
+from io import StringIO
 from docutils.parsers.rst.directives.misc import Raw
 from docutils.parsers.rst import directives
 from ansi2html import Ansi2HTMLConverter
+from contextlib import contextmanager
 from colorama import Style, Fore
 from pexpect import spawn
+from textwrap import dedent
 
 def get_interactive_result(code):
     child = spawn(executable, encoding='utf8')
@@ -47,28 +52,44 @@ class Python(Raw):
     has_content = True
     required_arguments = 0
 
-    option_spec = {
-        'norun': directives.flag,
-        'real_cmd': directives.unchanged,
-    }
-
-    variables = {
-        'python': executable
-    }
-
     def run(self):
         self.arguments[:] = ['html']
 
-        norun = 'norun' in self.options
         display_command = 'python ' + '\n'.join(self.content).strip()
         real_command = executable + ' ' + '\n'.join(self.content).strip()
         convertor = Ansi2HTMLConverter(dark_bg=True)
 
-        if not norun:
-            output = spawn(real_command, env={'TERM': 'screen', 'COLORTERM': 'truecolor', 'COLORFGBG': '7;0'}).read()
-            html = convertor.convert(f'{Style.BRIGHT}{Fore.RED}${Fore.BLACK} {display_command}{Fore.RESET}{Style.RESET_ALL}\n{output.decode("utf8").strip()}')
-        else:
-            html = convertor.convert(f'{Style.BRIGHT}{Fore.RED}${Fore.BLACK} {display_command}{Fore.RESET}{Style.RESET_ALL}')
+        output = spawn(real_command, env={'TERM': 'screen', 'COLORTERM': 'truecolor', 'COLORFGBG': '7;0'}).read()
+        html = convertor.convert(f'{Style.BRIGHT}{Fore.RED}${Fore.BLACK} {display_command}{Fore.RESET}{Style.RESET_ALL}\n{output.decode("utf8").strip()}')
+
+        self.content[0] = f'<div class="highlight", style="background-color:#F8F8F8;">{html}</div>'
+        return super().run()
+
+@contextmanager
+def stdout():
+    string = StringIO()
+    origin_stdout = sys.stdout
+    sys.stdout = string
+    yield string
+    sys.stdout = origin_stdout
+
+class Dis(Raw):
+    has_content = True
+    required_arguments = 0
+
+    def run(self):
+        self.arguments[:] = ['html']
+
+        with open(self.content[0], 'r', encoding='utf8') as file:
+            code = file.read()
+
+        with stdout() as string:
+            dis(code)
+
+        display_command = 'python ' + '\n'.join(self.content).strip()
+        convertor = Ansi2HTMLConverter(dark_bg=True)
+
+        html = convertor.convert(dedent(string.getvalue()).strip())
 
         self.content[0] = f'<div class="highlight", style="background-color:#F8F8F8;">{html}</div>'
         return super().run()
@@ -95,6 +116,7 @@ def setup(app):
     app.add_directive('bash', Bash)
     app.add_directive('python', Python)
     app.add_directive('interpreter', Interpreter)
+    app.add_directive('dis', Dis)
 
     return {
         'version': '0.1',
