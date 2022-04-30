@@ -88,7 +88,7 @@ class Dis(CodeBlock):
             dis(code)
 
         self.arguments[:] = ['text']
-        self.content = StringList(string.getvalue().splitlines())
+        self.content = StringList(dedent(string.getvalue()).splitlines())
         self.options['caption'] = f':py:obj:`{file_path}` 字节码的反汇编'
         return super().run()
 
