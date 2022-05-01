@@ -48,3 +48,7 @@
 - :py:`LOAD_FAST(var_num)`: Pushes a reference to the local :py:`co_varnames[var_num]` onto the stack.
 - :py:`LOAD_GLOBAL(namei)`: Loads the global named :py:`co_names[namei]` onto the stack.
 - :py:`LOAD_DEREF(i)`: Loads the cell contained in slot :py:`i` of the cell and free variable storage. Pushes a reference to the object the cell contains on the stack.
+
+我们注意到, 在\ :numref:`define_a_function_with_closure_dis` 中除了 :py:`LOAD_DEREF(i)` 还有一个特殊的操作 :py:`STORE_DEREF(i)`, 关于这个操作在 Python 的官方文档中也有说明:
+
+- :py:`STORE_DEREF(i)`: Stores TOS into the cell contained in slot i of the cell and free variable storage.
