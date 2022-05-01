@@ -69,4 +69,30 @@ Python 中的函数之所以是一等公民, 是因为 Python 中的一切都是
 
 这四个条件时, 才建议使用匿名函数.
 
-在 Python 中, 函数是一等公民, 是一个真正的对象, 同时, 对象也可以表现的像函数一样, 只需要实现对象的 :py:`__call__` 方法即可.
+在 Python 中, 函数是一等公民, 是一个真正的对象, 同时, 对象也可以表现的像函数一样, 只需要实现对象的 :py:`__call__` 方法即可, 比方说, 可以像\ :numref:`callable_object` 一样实现一个 :py:`add` 函数.
+
+.. _callable_object:
+
+.. code_file:: examples/object/first_class_public/callable_object.py
+
+.. python:: examples/object/first_class_public/callable_object.py
+
+实际上, 普通函数也有 :py:`__call__` 方法, 在 99% 的情况下, 调用 :py:`__call__` 方法和直接调用函数是一样的.
+
+.. code_file:: examples/object/first_class_public/define_a_function.py
+
+.. python:: examples/object/first_class_public/define_a_function.py
+
+那 1% 的情况是什么呢?
+
+.. _modify_call_method:
+
+.. code_file:: examples/object/first_class_public/modify_call_method.py
+
+.. python:: examples/object/first_class_public/modify_call_method.py
+
+我们可以看到, 在\ :numref:`modify_call_method` 中, 函数 :py:`add` 的 :py:`__call__` 方法已经被替换成了 :py:`sub` 的 :py:`__call__` 方法了. 此时直接调用 :py:`add` 方法和调用 :py:`add` 函数的 :py:`__call__` 方法得到的结果是不同的.
+
+.. hint::
+
+    在没有充分了解 Python 运作机制的情况下, 请不要像\ :numref:`modify_call_method` 中一样通过 MonkeyPatch 的方式修改 Python 的对象, 以防止不可预期的情况发生.
