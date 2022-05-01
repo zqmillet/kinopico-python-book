@@ -43,9 +43,8 @@
 - 根据\ :numref:`define_a_function_with_global_code` 和 :numref:`define_a_function_with_global_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_GLOBAL`.
 - 根据\ :numref:`define_a_function_with_closure_code` 和 :numref:`define_a_function_with_closure_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_DEREF`.
 
-那么问题来了, :py:`LOAD_FAST`, :py:`LOAD_GLOBAL` 和 :py:`LOAD_DEREF` 各是做什么的呢? 这个在 Python 的\ `官方文档 <https://docs.python.org/zh-cn/3/library/dis.html>`_\ 中是有说明的:
+那么问题来了, :py:`LOAD_FAST`, :py:`LOAD_GLOBAL` 和 :py:`LOAD_DEREF` 各是做什么的呢? 这个在 Python 的\ `官方文档 <https://docs.python.org/3/library/dis.html>`_\ 中是有说明的:
 
-- :py:`LOAD_FAST(var_num)` 将指向局部对象 :py:`co_varnames[var_num]` 的引用推入栈顶.
-- :py:`LOAD_GLOBAL(namei)` 加载名称为 :py:`co_names[namei]` 的全局对象推入栈顶.
-- :py:`LOAD_DEREF(i)` 加载包含在单元的第 :py:`i` 个空位中的单元并释放可用的存储空间. 将一个对单元所包含对象的引用推入栈顶.
-
+- :py:`LOAD_FAST(var_num)`: Pushes a reference to the local :py:`co_varnames[var_num]` onto the stack.
+- :py:`LOAD_GLOBAL(namei)`: Loads the global named :py:`co_names[namei]` onto the stack.
+- :py:`LOAD_DEREF(i)`: Loads the cell contained in slot :py:`i` of the cell and free variable storage. Pushes a reference to the object the cell contains on the stack.
