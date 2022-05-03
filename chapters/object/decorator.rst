@@ -52,3 +52,5 @@
 我们注意到, 在\ :numref:`define_a_function_with_closure_dis` 中除了 :py:`LOAD_DEREF(i)` 还有一个特殊的操作 :py:`STORE_DEREF(i)`, 关于这个操作在 Python 的官方文档中也有说明:
 
 - :py:`STORE_DEREF(i)`: Stores TOS into the cell contained in slot i of the cell and free variable storage.
+
+
