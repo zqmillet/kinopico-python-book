@@ -49,8 +49,9 @@
 - :py:`LOAD_GLOBAL(namei)`: Loads the global named :py:`co_names[namei]` onto the stack.
 - :py:`LOAD_DEREF(i)`: Loads the cell contained in slot :py:`i` of the cell and free variable storage. Pushes a reference to the object the cell contains on the stack.
 
-我们注意到, 在\ :numref:`define_a_function_with_closure_dis` 中除了 :py:`LOAD_DEREF(i)` 还有一个特殊的操作 :py:`STORE_DEREF(i)`, 关于这个操作在 Python 的官方文档中也有说明:
+其中 :py:`LOAD_FAST(var_num)` 和 :py:`LOAD_GLOBAL(namei)` 都很好理解, 分别是加载局部变量, 一个是加载全局变量. 我们注意到, 在\ :numref:`define_a_function_with_closure_dis` 中除了 :py:`LOAD_DEREF(i)` 还有一个特殊的操作 :py:`STORE_DEREF(i)`, 关于这个操作在 Python 的官方文档中也有说明:
 
 - :py:`STORE_DEREF(i)`: Stores TOS into the cell contained in slot i of the cell and free variable storage.
 
+:py:`LOAD_DEREF(i)` 和 :py:`STORE_DEREF(i)`: 这两个操作就是用来实现闭包的. 为什么会存在闭包这个特性呢? 我们都知道, 局部变量的生命周期只存在于这个函数, 如果函数结束了, 那么局部变量的生命周期也结束了. 这个特性如果作用在装饰器上就会出现问题, 比如在\ :numref:`define_a_function_with_closure_code` 中, 函数 :py:`get_function` 中定义了一个函数 :py:`function`, 而在这个 :py:`function` 中, 又引用了局部变量 :py:`a`. 如果这个局部变量 :py:`a` 在函数 :py:`get_function` 结束的时候被销毁了, 那么调用 :py:`function` 的时候就会出现找不到 :py:`a` 的错误. 为了解决这个问题, 所以必须将 :py:`a` 保存起来, 考虑到 :py:`a` 既不是全局变量, 也不能是局部变量, 因此只能将 :py:`a` 这个对象保存在函数 :py:`function` 的的某个空间下, 这个特性就是闭包.
 
