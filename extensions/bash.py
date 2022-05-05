@@ -79,10 +79,22 @@ class Dis(CodeBlock):
     has_content = True
     required_arguments = 0
 
+    option_spec = {
+        'begin': directives.positive_int,
+        'end': directives.positive_int,
+    }
+
     def run(self):
         file_path = self.arguments[0]
+        begin = self.options.get('begin', 0)
+        end = self.options.get('end', -1)
         with open(file_path, 'r', encoding='utf8') as file:
             code = file.read()
+
+        if end == -1:
+            code = '\n'.join(code.splitlines()[begin:])
+        else:
+            code = '\n'.join(code.splitlines()[begin:end])
 
         with stdout() as string:
             dis(code)

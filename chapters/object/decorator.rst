@@ -74,5 +74,10 @@
 .. _print_closure_dis:
 
 .. dis:: examples/object/decorator/print_closure.py
+   :end: 6
 
+为了搞清楚加载的顺序, 
 
+.. code_file:: examples/object/decorator/load_order.py
+
+.. dis:: examples/object/decorator/load_order.py
