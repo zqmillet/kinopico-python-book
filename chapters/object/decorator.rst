@@ -76,8 +76,21 @@
 .. dis:: examples/object/decorator/print_closure.py
    :end: 6
 
-为了搞清楚加载的顺序, 
+为了搞清楚加载的顺序, 我们又写了一段代码, 如\ :numref:`load_order_code` 所示, 其反汇编代码如\ :numref:`load_order_dis` 所示.
+
+.. _load_order_code:
 
 .. code_file:: examples/object/decorator/load_order.py
 
+在\ :numref:`load_order_code` 第 11 行中的三个变量:
+
+- :py:`a`
+- :py:`b`
+- :py:`c`
+
+.. _load_order_dis:
+
 .. dis:: examples/object/decorator/load_order.py
+
+我们可以看到第 9 行的反汇编, 对于变量 :py:`a` 使用的是 :py:`LOAD_DEREF`, 对于变量 :py:`b` 使用的是 :py:`LOAD_FAST`. 通过这段代码, 我们可以看出:
+
