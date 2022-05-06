@@ -86,22 +86,20 @@ class Dis(CodeBlock):
 
     def run(self):
         file_path = self.arguments[0]
-        begin = self.options.get('begin', 0)
-        end = self.options.get('end', -1)
         with open(file_path, 'r', encoding='utf8') as file:
-            code = file.read()
+            lines = file.read().splitlines()
 
-        if end == -1:
-            code = '\n'.join(code.splitlines()[begin:])
-        else:
-            code = '\n'.join(code.splitlines()[begin:end])
+        begin = self.options.get('begin', 1)
+        end = self.options.get('end', len(lines))
+
+        code = '\n'.join(lines[begin-1:end])
 
         with stdout() as string:
             dis(code)
 
         self.arguments[:] = ['text']
         self.content = StringList(dedent(string.getvalue()).splitlines())
-        self.options['caption'] = f':py:obj:`{file_path}` 字节码的反汇编'
+        self.options['caption'] = f':py:obj:`{file_path}` {begin}-{end} 行的字节码的反汇编'
         return super().run()
 
 class Interpreter(Raw):

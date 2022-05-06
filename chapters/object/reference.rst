@@ -38,9 +38,11 @@
 
 好像哪里不对劲, 跟我们之前分析的有一些出入. 这是由于 Python 会将一些常用的整数缓存起来, 不会每次都重新构造一个新的对象. 笔者使用的 Python 版本为 |python_version|, 操作系统为 |os|, 在该版本中, 范围在 :math:`[-5, 256]` 之间的整数都会被缓存到内存中, 为了验证我们的结论, 我们将\ :numref:`assignment_of_int_code` 稍加改动, 执行结果就完全不一样了.
 
+.. _assignment_of_int_code_257:
+
 .. code_file:: examples/object/reference/assignment_of_int_257.py
 
-我们执行一下\ :numref:`assignment_of_int_code`.
+我们执行一下\ :numref:`assignment_of_int_code_257`.
 
 .. python:: examples/object/reference/assignment_of_int_257.py
 
