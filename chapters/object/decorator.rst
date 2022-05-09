@@ -90,8 +90,6 @@
 
 .. _load_order_dis:
 
-
 .. dis:: examples/object/decorator/load_order.py
 
 我们可以看到第 9 行的反汇编, 对于变量 :py:`a` 使用的是 :py:`LOAD_DEREF`, 对于变量 :py:`b` 使用的是 :py:`LOAD_FAST`. 通过这段代码, 我们可以看出:
-
