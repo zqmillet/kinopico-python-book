@@ -84,9 +84,9 @@
 
 在\ :numref:`load_order_code` 第 11 行中的三个变量:
 
-- :py:`a`
-- :py:`b`
-- :py:`c`
+- :py:`a` 只在全局被定义.
+- :py:`b` 在全局以及函数 :py:`get_function` 内部被定义.
+- :py:`c` 在全局, 函数 :py:`get_function`, 以及 :py:`function` 内部被定义.
 
 .. _load_order_dis:
 

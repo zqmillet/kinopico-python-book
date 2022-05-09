@@ -3,8 +3,8 @@ b = 1
 c = 1
 
 def get_function():
-    a = 1
     b = 1
+    c = 1
 
     def function():
         c = 1
