@@ -1,12 +1,9 @@
-a = 1
-b = 1
-c = 1
+a, b, c  = 1, 1, 1
 
 def get_function():
-    b = 1
-    c = 1
+    b, c = 1, 1
 
     def function():
         c = 1
-        return a, b, c
+        return a, b, c, d
     return function
