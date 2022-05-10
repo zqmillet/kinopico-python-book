@@ -61,7 +61,9 @@ Python 查找变量
 
 - :py:`STORE_DEREF(i)`: Stores TOS into the cell contained in slot i of the cell and free variable storage.
 
-:py:`LOAD_DEREF(i)` 和 :py:`STORE_DEREF(i)`: 这两个操作就是用来实现闭包的.为了搞清楚加载的顺序, 我们又写了一段代码, 如\ :numref:`load_order_code` 所示, 其反汇编代码如\ :numref:`load_order_dis` 所示.
+实际上 :py:`LOAD_DEREF(i)` 和 :py:`STORE_DEREF(i)` 这两个操作就是用来实现闭包特性的.
+
+那什么时候 Python 会使用闭包呢? 为了搞清楚这个问题, 我们又写了一段代码, 如\ :numref:`load_order_code` 所示, 其反汇编代码如\ :numref:`load_order_dis` 所示.
 
 .. _load_order_code:
 
@@ -78,7 +80,7 @@ Python 查找变量
 
 .. dis:: examples/object/decorator/load_order.py
 
-通过\ :numref:`load_order_dis` 对\ :numref:`load_order_code` 的反编译代码可以看出:
+通过\ :numref:`load_order_dis`, 即对\ :numref:`load_order_code` 的反编译代码可以看出:
 
 - :py:`a` 使用的是 :py:`LOAD_GLOBAL`,
 - :py:`b` 使用的是 :py:`LOAD_DEREF`,
@@ -102,9 +104,9 @@ Python 查找变量
 函数的闭包
 ----------
 
-在\ :numref:`find_variable` 中, 我们用了大段的篇幅来讨论
+在\ :numref:`find_variable` 中, 我们用了大段的篇幅来讨论在 Python 中如何查找一个变量的值, 目的是为了引出函数闭包的概念. 那为什么会存在闭包这个特性呢?
 
- 为什么会存在闭包这个特性呢? 我们都知道, 局部变量的生命周期只存在于这个函数, 如果函数结束了, 那么局部变量的生命周期也结束了. 这个特性如果作用在装饰器上就会出现问题, 比如在\ :numref:`define_a_function_with_closure_code` 中, 函数 :py:`get_function` 中定义了一个函数 :py:`function`, 而在这个 :py:`function` 中, 又引用了局部变量 :py:`a`. 如果这个局部变量 :py:`a` 在函数 :py:`get_function` 结束的时候被销毁了, 那么调用 :py:`function` 的时候就会出现找不到 :py:`a` 的错误. 为了解决这个问题, 所以必须将 :py:`a` 保存起来, 考虑到 :py:`a` 既不是全局变量, 也不能是局部变量, 因此只能将 :py:`a` 这个对象保存在函数 :py:`function` 的的某个空间下, 这个特性就是闭包.
+我们都知道, 在 Python 中, 局部变量的生命周期只存在于这个函数, 如果函数结束了, 那么局部变量的生命周期也结束了. 这个特性如果作用在装饰器上就会出现问题, 比如在\ :numref:`define_a_function_with_closure_code` 中, 函数 :py:`get_function` 中定义了一个函数 :py:`function`, 而在这个 :py:`function` 中, 又引用了局部变量 :py:`a`. 如果这个局部变量 :py:`a` 在函数 :py:`get_function` 结束的时候被销毁了, 那么调用 :py:`function` 的时候就会出现找不到 :py:`a` 的错误. 为了解决这个问题, 所以必须将 :py:`a` 保存起来, 考虑到 :py:`a` 既不是全局变量, 也不能是局部变量, 因此只能将 :py:`a` 这个对象保存在函数 :py:`function` 的的某个空间下, 这个特性就是闭包.
 
 函数 :py:`function` 有一个名为 :py:`__closure__` 的属性, 如\ :numref:`print_closure_code` 所示.
 
