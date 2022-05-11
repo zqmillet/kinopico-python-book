@@ -84,8 +84,8 @@ Python 查找变量
 
 - :py:`a` 使用的是 :py:`LOAD_GLOBAL`,
 - :py:`b` 使用的是 :py:`LOAD_DEREF`,
-- :py:`c` 使用的是 :py:`LOAD_FAST`.
-- :py:`d` 使用的是 :py:`LOAD_GLOBAL`,
+- :py:`c` 使用的是 :py:`LOAD_FAST`,
+- :py:`d` 使用的是 :py:`LOAD_GLOBAL`.
 
 这样的话, 我们可以得出 Python 根据变量名字查找变量值的优先级.
 
@@ -100,6 +100,8 @@ Python 查找变量
 .. hint::
 
     我们注意到, 变量 :py:`d` 并没有在任何地方被定义, 但是 Python 也会使用 :py:`LOAD_GLOBAL` 查找其值. :py:`LOAD_FAST` 可以看作是一种兜底策略, 如果在全局当中也找不到, 则抛出 :py:`NameError`.
+
+.. _function_closure:
 
 函数的闭包
 ----------
@@ -129,4 +131,10 @@ Python 查找变量
 .. dis:: examples/object/decorator/print_closure.py
    :end: 6
 
+闭包有什用
+------------
 
+在\ :numref:`function_closure` 中, 我们对闭包进行了讨论, 所谓的函数的闭包, 只是函数内部引用了外部的一些变量, 这些变量会被保存在函数的 :py:`__closure__` 成员中, 其生命周期与函数的生命周期一致. 闭包的存在, 使得函数有了状态.
+
+修饰器的另一种写法
+------------------
