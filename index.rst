@@ -18,6 +18,7 @@ Kinopic's Python Book
     chapters/object/reference.rst
     chapters/object/all_are_objects.rst
     chapters/object/first_class_public.rst
+    chapters/object/load_object.rst
     chapters/object/decorator.rst
     chapters/object/generator.rst
     chapters/object/functional_programming.rst
