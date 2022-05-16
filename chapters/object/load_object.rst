@@ -41,7 +41,7 @@ Python 在执行的过程中, 是怎么根据名字来查找变量的. 为了搞
 - :py:`LOAD_GLOBAL(namei)`: Loads the global named :py:`co_names[namei]` onto the stack.
 - :py:`LOAD_DEREF(i)`: Loads the cell contained in slot :py:`i` of the cell and free variable storage. Pushes a reference to the object the cell contains on the stack.
 
-其中 :py:`LOAD_FAST(var_num)` 和 :py:`LOAD_GLOBAL(namei)` 都很好理解, 分别是加载局部变量, 一个是加载全局变量. 我们注意到, 在\ :numref:`define_a_function_with_closure_dis` 中除了 :py:`LOAD_DEREF(i)` 还有一个特殊的操作 :py:`STORE_DEREF(i)`, 关于这个操作在 Python 的官方文档中也有说明:
+其中 :py:`LOAD_FAST(var_num)` 和 :py:`LOAD_GLOBAL(namei)` 都很好理解, 分别是加载局部变量和加载全局变量. 我们注意到, 在\ :numref:`define_a_function_with_closure_dis` 中除了 :py:`LOAD_DEREF(i)` 还有一个特殊的操作 :py:`STORE_DEREF(i)`, 关于这个操作在 Python 的官方文档中也有说明:
 
 - :py:`STORE_DEREF(i)`: Stores TOS into the cell contained in slot i of the cell and free variable storage.
 

@@ -1,9 +1,6 @@
 装饰器
 ======
 
-一个简单的装饰器
-----------------
-
 装饰器说白了, 就是一个加工函数的函数.
 
 比如, 我想打印函数的执行时间, 那么可以定义一个装饰器, 如\ :numref:`time_decorator` 所示.
@@ -14,10 +11,13 @@
 
 .. python:: examples/object/decorator/time_decorator.py
 
-.. _function_closure:
+通常情况下, 修饰器并不会这么简单, 而是会携带一些可配置的参数, 比如, 我们要在\ :numref:`time_decorator` 的基础上添加一个消息模板的参数, 实现代码如\ :numref:`time_decorator_with_arguments` 所示.
 
-函数的闭包
-----------
+.. _time_decorator_with_arguments:
+
+.. code_file:: examples/object/decorator/time_decorator_with_arguments.py
+
+.. python:: examples/object/decorator/time_decorator_with_arguments.py
 
 在\ :numref:`find_variable` 中, 我们用了大段的篇幅来讨论在 Python 中如何查找一个变量的值, 目的是为了引出函数闭包的概念. 那为什么会存在闭包这个特性呢?
 
@@ -44,10 +44,5 @@
 .. dis:: examples/object/decorator/print_closure.py
    :end: 6
 
-闭包有什用
-----------
+所谓的函数的闭包, 只是函数内部引用了外部的一些变量, 这些变量会被保存在函数的 :py:`__closure__` 成员中, 其生命周期与函数的生命周期一致. 闭包的存在, 使得函数有了状态.
 
-在\ :numref:`function_closure` 中, 我们对闭包进行了讨论, 所谓的函数的闭包, 只是函数内部引用了外部的一些变量, 这些变量会被保存在函数的 :py:`__closure__` 成员中, 其生命周期与函数的生命周期一致. 闭包的存在, 使得函数有了状态.
-
-修饰器的另一种写法
-------------------

@@ -1,10 +1,12 @@
 from time import time
+from functools import wraps
 
 def print_time(function):
+    @wraps(function)
     def wrapper(*args, **kwargs):
         now = time()
         return_value = function(*args, **kwargs)
-        print(f'consuming time {time() - now}s')
+        print('consuming time is %fs' % (time() - now))
         return return_value
     return wrapper
 
