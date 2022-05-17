@@ -2,15 +2,15 @@ from time import time
 from functools import wraps
 
 def print_time(message):
-    def _print_time(function):
+    def wrapper(function):
         @wraps(function)
-        def wrapper(*args, **kwargs):
+        def _print_time(*args, **kwargs):
             now = time()
             return_value = function(*args, **kwargs)
             print(message % (time() - now))
             return return_value
-        return wrapper
-    return _print_time
+        return _print_time
+    return wrapper 
 
 @print_time(message='consuming time %fs')
 def add(x, y):
