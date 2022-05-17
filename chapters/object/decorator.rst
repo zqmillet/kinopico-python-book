@@ -39,7 +39,7 @@
 
 我们都知道, 在 Python 中, 局部变量的生命周期与所在函数的生命周期一致, 如果函数结束了, 那么局部变量的生命周期也结束了. 这个特性如果作用在装饰器上就会出现问题, 比如在\ :numref:`time_decorator_with_arguments` 中, 函数 :py:`_print_time` 用到了 :py:`message` 变量, 这个变量是来自函数 :py:`print_time` 的, 当调用 :py:`_print_time` (也就是 :py:`add` 函数) 时, 函数 :py:`print_time` 已经结束运行了, 按理说变量 :py:`message` 也一同消失了, 但是根据执行结果可以看出在调用 :py:`_print_time` 时变量 :py:`message` 仍然存在.
 
-我们来看一下\ :numref:`time_decorator_with_arguments` 的反汇编代码, 如\ :numref:`time_decorator_with_arguments_dis` 所示.
+那么 Python 是怎么解决这个问题的呢? 我们来看一下\ :numref:`time_decorator_with_arguments` 的反汇编代码, 如\ :numref:`time_decorator_with_arguments_dis` 所示.
 
 .. _time_decorator_with_arguments_dis:
 
@@ -53,10 +53,12 @@
 - 在第 7 行, 执行 :py:`LOAD_CLOSURE` 将变量 :py:`message` 保存在函数 :py:`_print_time` 中.
 - 在第 10 行, 执行 :py:`LOAD_DEREF` 将变量 :py:`message` 加载回来.
 
-在 Python 的\ `官方文档 <https://docs.python.org/3/library/dis.html>`_\ 中, 有关于 :py:`LOAD_CLOSURE` 和 :py:`LOAD_DEREF` 的解释.
+.. hint::
 
-- :py:`LOAD_CLOSURE(i)`: Pushes a reference to the cell contained in slot :py:`i` of the cell and free variable storage. The name of the variable is :py:`co_cellvars[i]` if :py:`i` is less than the length of :py:`co_cellvars`. Otherwise it is :py:`co_freevars[i - len(co_cellvars)]`.
-- :py:`LOAD_DEREF(i)`: Loads the cell contained in slot :py:`i` of the cell and free variable storage. Pushes a reference to the object the cell contains on the stack.
+    在 Python 的\ `官方文档 <https://docs.python.org/3/library/dis.html>`_\ 中, 有关于 :py:`LOAD_CLOSURE` 和 :py:`LOAD_DEREF` 的解释.
+
+    - :py:`LOAD_CLOSURE(i)`: Pushes a reference to the cell contained in slot :py:`i` of the cell and free variable storage. The name of the variable is :py:`co_cellvars[i]` if :py:`i` is less than the length of :py:`co_cellvars`. Otherwise it is :py:`co_freevars[i - len(co_cellvars)]`.
+    - :py:`LOAD_DEREF(i)`: Loads the cell contained in slot :py:`i` of the cell and free variable storage. Pushes a reference to the object the cell contains on the stack.
 
 .. :py:`message` 参数, 而在这个 :py:`function` 中, 又引用了局部变量 :py:`a`. 如果这个局部变量 :py:`a` 在函数 :py:`get_function` 结束的时候被销毁了, 那么调用 :py:`function` 的时候就会出现找不到 :py:`a` 的错误. 为了解决这个问题, 所以必须将 :py:`a` 保存起来, 考虑到 :py:`a` 既不是全局变量, 也不能是局部变量, 因此只能将 :py:`a` 这个对象保存在函数 :py:`function` 的的某个空间下, 这个特性就是闭包.
 
