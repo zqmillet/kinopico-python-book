@@ -49,9 +49,9 @@
 
 通过\ :numref:`time_decorator_with_arguments` 和\ :numref:`time_decorator_with_arguments_dis` 对照, 我们可以看出:
 
-- 在第 5 行, 执行 :py:`LOAD_CLOSURE` 将变量 :py:`message` 保存在函数 :py:`wrapper` 中.
-- 在第 7 行, 执行 :py:`LOAD_CLOSURE` 将变量 :py:`message` 保存在函数 :py:`_print_time` 中.
-- 在第 10 行, 执行 :py:`LOAD_DEREF` 将变量 :py:`message` 加载回来.
+- 在第 5 行, 在定义函数 :py:`wrapper` 时, 执行 :py:`LOAD_CLOSURE` 将变量 :py:`message` 保存在函数 :py:`wrapper` 中.
+- 在第 7 行, 在定义函数 :py:`_print_time` 时, 执行 :py:`LOAD_CLOSURE` 将变量 :py:`message` 保存在函数 :py:`_print_time` 中.
+- 在第 10 行, 在调用变量 :py:`message` 时, 执行 :py:`LOAD_DEREF` 将变量 :py:`message` 加载回来.
 
 .. hint::
 
@@ -59,6 +59,8 @@
 
     - :py:`LOAD_CLOSURE(i)`: Pushes a reference to the cell contained in slot :py:`i` of the cell and free variable storage. The name of the variable is :py:`co_cellvars[i]` if :py:`i` is less than the length of :py:`co_cellvars`. Otherwise it is :py:`co_freevars[i - len(co_cellvars)]`.
     - :py:`LOAD_DEREF(i)`: Loads the cell contained in slot :py:`i` of the cell and free variable storage. Pushes a reference to the object the cell contains on the stack.
+
+修饰器中的参数或者状态变量, 会通过闭包的方式逐层的传递到内层的函数, 从而解决变量生命周期提前结束的问题.
 
 .. :py:`message` 参数, 而在这个 :py:`function` 中, 又引用了局部变量 :py:`a`. 如果这个局部变量 :py:`a` 在函数 :py:`get_function` 结束的时候被销毁了, 那么调用 :py:`function` 的时候就会出现找不到 :py:`a` 的错误. 为了解决这个问题, 所以必须将 :py:`a` 保存起来, 考虑到 :py:`a` 既不是全局变量, 也不能是局部变量, 因此只能将 :py:`a` 这个对象保存在函数 :py:`function` 的的某个空间下, 这个特性就是闭包.
 
