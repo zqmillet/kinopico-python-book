@@ -1,1 +1,1 @@
-# kinopico
+# kinopico python book
