@@ -1,9 +1,27 @@
 装饰器
 ======
 
-装饰器说白了, 就是一个加工函数的函数.
+装饰器说白了, 就是一个加工函数的函数. 我们通常用的 :py:`@` 操作符是一个语法糖. :numref:`decorator_demo_1` 和\ :numref:`decorator_demo_2` 的含义是相同的.
 
-比如, 我想打印函数的执行时间, 那么可以定义一个装饰器, 如\ :numref:`time_decorator` 所示.
+.. _decorator_demo_1:
+
+.. code_file:: examples/object/decorator/demo_1.py
+
+.. _decorator_demo_2:
+
+.. code_file:: examples/object/decorator/demo_2.py
+
+:numref:`decorator_demo_1` 和\ :numref:`decorator_demo_2` 反汇编代码如\ :numref:`decorator_demo_1_dis` 和\ :numref:`decorator_demo_2_dis` 所示, 可以看出, 二者都是通过 :py:`CALL_FUNCTION` 调用函数 :py:`decorator` 修饰器, 并且通过 :py:`STORE_NAME` 将 :py:`decorator` 的返回值保存到 :py:`function` 中.
+
+.. _decorator_demo_1_dis:
+
+.. dis:: examples/object/decorator/demo_1.py
+
+.. _decorator_demo_2_dis:
+
+.. dis:: examples/object/decorator/demo_2.py
+
+装饰器有很多应用场景, 比如, 我想打印函数的执行时间, 那么可以定义一个装饰器, 如\ :numref:`time_decorator` 所示.
 
 .. _time_decorator:
 
