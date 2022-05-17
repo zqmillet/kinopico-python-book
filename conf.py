@@ -67,3 +67,6 @@ tikz_latex_preamble += r'''
 tikz_tikzlibraries='positioning'
 
 latex_engine = 'xelatex'
+
+def setup(app):
+    app.add_css_file('my_theme.css')

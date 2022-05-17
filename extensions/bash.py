@@ -92,7 +92,7 @@ class Dis(CodeBlock):
         begin = self.options.get('begin', 1)
         end = self.options.get('end', len(lines))
 
-        code = '\n'.join(lines[begin-1:end])
+        code = '\n' * (begin - 1) + '\n'.join(lines[begin-1:end])
 
         with stdout() as string:
             dis(code)
