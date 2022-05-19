@@ -68,8 +68,18 @@
 
 其运行结果如下所示, 根据运行结果, 我们可以得到几个结论:
 
+.. python:: examples/object/decorator/print_closure.py
+
 - 如果一个函数存在闭包, 那么它的 :py:`__closure__` 是一个 :py:`tuple` 类型, 否则 :py:`__closure__` 的值为 :py:`None`.
 - :py:`__closure__` 中元素的类型是 :py:`cell`, 元素个数为闭包变量的数量.
 - :py:`__closure__` 中元素的 :py:`cell_contents` 属性为闭包变量的值.
 
-.. python:: examples/object/decorator/print_closure.py
+闭包的存在, 使得装饰器有了状态, 如果要实现一个有状态的装饰器不一定非要使用闭包. 这里可以介绍另一种实现有参数装饰器的方式, 如\ :numref:`time_decorator_with_arguments_v2` 所示.
+
+.. _time_decorator_with_arguments_v2:
+
+.. code_file:: examples/object/decorator/time_decorator_with_arguments_v2.py
+
+.. python:: examples/object/decorator/time_decorator_with_arguments_v2.py
+
+:numref:`time_decorator_with_arguments_v2` 这种方式理解起来比较简单, 参数再多也不会混乱, 但是也有一点的小缺点: Python 中的类名规范是大驼峰, 但是装饰器名称一般都是小写, 在标准上存在冲突..
