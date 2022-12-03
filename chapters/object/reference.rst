@@ -23,7 +23,8 @@
 
 .. _assignment_of_int_code:
 
-.. code_file:: examples/object/reference/assignment_of_int_1.py
+.. literalinclude:: /examples/object/reference/assignment_of_int_1.py
+   :caption: ``examples/object/reference/assignment_of_int_1.py``
 
 按照我们的之前的解释, 在\ :numref:`assignment_of_int_code` 中:
 
@@ -34,21 +35,22 @@
 
 由于 :py:`a` 和 :py:`b` 是两个不同的对象, 因此 :py:`a` 和 :py:`b` 的地址是不同的. 所以最终的输出应该是 :py:`a is not b`. 我们执行一下\ :numref:`assignment_of_int_code`, 其输出如下所示.
 
-.. python:: examples/object/reference/assignment_of_int_1.py
+.. bash:: python3 examples/object/reference/assignment_of_int_1.py
 
 好像哪里不对劲, 跟我们之前分析的有一些出入. 这是由于 Python 会将一些常用的整数缓存起来, 不会每次都重新构造一个新的对象. 笔者使用的 Python 版本为 |python_version|, 操作系统为 |os|, 在该版本中, 范围在 :math:`[-5, 256]` 之间的整数都会被缓存到内存中, 为了验证我们的结论, 我们将\ :numref:`assignment_of_int_code` 稍加改动, 执行结果就完全不一样了.
 
 .. _assignment_of_int_code_257:
 
-.. code_file:: examples/object/reference/assignment_of_int_257.py
+.. literalinclude:: /examples/object/reference/assignment_of_int_257.py
+   :caption: ``examples/object/reference/assignment_of_int_257.py``
 
 我们执行一下\ :numref:`assignment_of_int_code_257`.
 
-.. python:: examples/object/reference/assignment_of_int_257.py
+.. bash:: python3 examples/object/reference/assignment_of_int_257.py
 
 额, 结果非常出乎我们的意料. 读者们, 请听我解释, 是酱紫的. Python 在运行脚本的时候, 已经拿到了所有的信息, 会做一些性能上的优化工作. 于是两个 :py:`257` 就被优化成了一个对象. 如果用 Python 的交互模式来执行这段代码, 结果就不一样了.
 
-.. interpreter::
+.. python::
 
     a = 1
     b = 1
@@ -70,11 +72,12 @@
 
 .. _change_value_code:
 
-.. code_file:: examples/object/reference/change_reference_value.py
+.. literalinclude:: /examples/object/reference/change_reference_value.py
+   :caption: ``examples/object/reference/change_reference_value.py``
 
 由于 :py:`a` 和 :py:`b` 指向同一个对象的地址, 修改 :py:`a` 的值, 那么 :py:`b` 的值也一定会发生更改, 因此, 此时输出 :py:`b` 的值应该是 :py:`2`.
 
-.. python:: examples/object/reference/change_reference_value.py
+.. bash:: python3 examples/object/reference/change_reference_value.py
 
 然而事实上, 执行结果显示 :py:`b` 的值并没有发生变化. 这好像跟之前说的不太一样? 这个结果跟之前表述的观点并不矛盾, 原因在于, 当执行 :py:`a = 2` 时, 不是将 :py:`a` 所指的对象的值改为 :py:`2`, 而创建了一个对象 :py:`2`, 然后给这个对象起名为 :py:`a`, 此时 :py:`a` 不再是对象 :py:`1` 的名字, 但是 :py:`b` 仍然是对象 :py:`1` 的名字, 当我们访问 :py:`b` 的值, 当然还是 :py:`1`.
 
@@ -82,11 +85,12 @@
 
 .. _change_list_code:
 
-.. code_file:: examples/object/reference/change_list.py
+.. literalinclude:: /examples/object/reference/change_list.py
+   :caption: ``examples/object/reference/change_list.py``
 
 输出结果如下所示, 有没有跟你想的不一样呢?
 
-.. python:: examples/object/reference/change_list.py
+.. bash:: python3 examples/object/reference/change_list.py
 
 .. admonition:: 你会有这种疑问吗?
 
@@ -127,9 +131,11 @@
 
 有人要问, 你讲了这么多, 有什么证据吗? 有的, 我们通过分析 Python 字节码的反汇编就可以看出 Python 底层的运行逻辑. 以下两段代码分别是 Python 源代码以及对应的反汇编.
 
-.. code_file:: examples/object/reference/assignments.py
+.. literalinclude:: /examples/object/reference/assignments.py
+   :caption: ``examples/object/reference/assignments.py``
+   :linenos:
 
-.. dis:: examples/object/reference/assignments.py
+.. bash:: cat examples/object/reference/assignments.py | python3 -m dis
 
 其中:
 

@@ -7,29 +7,32 @@ Python 在执行的过程中, 是怎么根据名字来查找变量的. 为了搞
 
 .. _define_a_function_with_local_code:
 
-.. code_file:: examples/object/decorator/define_a_function_with_local.py
+.. literalinclude:: /examples/object/decorator/define_a_function_with_local.py
+   :caption: ``examples/object/decorator/define_a_function_with_local.py``
 
 .. _define_a_function_with_global_code:
 
-.. code_file:: examples/object/decorator/define_a_function_with_global.py
+.. literalinclude:: /examples/object/decorator/define_a_function_with_global.py
+   :caption: ``examples/object/decorator/define_a_function_with_global.py``
 
 .. _define_a_function_with_closure_code:
 
-.. code_file:: examples/object/decorator/define_a_function_with_closure.py
+.. literalinclude:: /examples/object/decorator/define_a_function_with_closure.py
+   :caption: ``examples/object/decorator/define_a_function_with_closure.py``
 
 这三段代码的反汇编分别是\ :numref:`define_a_function_with_local_dis`, :numref:`define_a_function_with_global_dis` 和\ :numref:`define_a_function_with_closure_dis`.
 
 .. _define_a_function_with_local_dis:
 
-.. dis:: examples/object/decorator/define_a_function_with_local.py
+.. bash:: cat examples/object/decorator/define_a_function_with_local.py | python3 -m dis
 
 .. _define_a_function_with_global_dis:
 
-.. dis:: examples/object/decorator/define_a_function_with_global.py
+.. bash:: cat examples/object/decorator/define_a_function_with_global.py | python3 -m dis
 
 .. _define_a_function_with_closure_dis:
 
-.. dis:: examples/object/decorator/define_a_function_with_closure.py
+.. bash:: cat examples/object/decorator/define_a_function_with_closure.py | python3 -m dis
 
 - 根据\ :numref:`define_a_function_with_local_code` 和 :numref:`define_a_function_with_local_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_FAST`.
 - 根据\ :numref:`define_a_function_with_global_code` 和 :numref:`define_a_function_with_global_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_GLOBAL`.
@@ -51,7 +54,8 @@ Python 在执行的过程中, 是怎么根据名字来查找变量的. 为了搞
 
 .. _load_order_code:
 
-.. code_file:: examples/object/decorator/load_order.py
+.. literalinclude:: /examples/object/decorator/load_order.py
+   :caption: ``examples/object/decorator/load_order.py``
 
 在\ :numref:`load_order_code` 第 11 行中的 4 个变量:
 
@@ -62,7 +66,7 @@ Python 在执行的过程中, 是怎么根据名字来查找变量的. 为了搞
 
 .. _load_order_dis:
 
-.. dis:: examples/object/decorator/load_order.py
+.. bash:: cat examples/object/decorator/load_order.py | python3 -m dis
 
 通过\ :numref:`load_order_dis`, 即对\ :numref:`load_order_code` 的反编译代码可以看出:
 
