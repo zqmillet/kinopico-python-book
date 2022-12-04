@@ -1,3 +1,5 @@
 @import "css/theme.css";
 
 .rst-content .code-block-caption {font-style: normal;}
+.rst-content .bash-caption {font-style: normal;}
+.rst-content .python-disassembly-caption {font-style: normal;}

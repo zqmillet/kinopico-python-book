@@ -5,6 +5,6 @@
 
 笔者使用的 Python 版本信息如下所示.
 
-.. code_file:: examples/introductions/second/show_version.py
+.. python::
 
-.. python:: examples/introductions/second/show_version.py
+    exit()

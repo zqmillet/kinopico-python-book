@@ -5,9 +5,8 @@ author = 'kinopico'
 project = 'kinopico\'s python book'
 
 extensions = [
-    'sphinxcontrib.tikz',
     'sphinx.ext.graphviz',
-    'sphinx_console'
+    'sphinxcontrib.console',
 ]
 
 html_theme = 'sphinx_rtd_theme'
@@ -23,9 +22,6 @@ html_css_files = ['style.css']
 
 numfig = True
 numfig_format = {
-    'code-block': '代码 %s',
-    'figure': '图 %s',
-    'section': '章节 %s'
 }
 
 rst_prolog = '''

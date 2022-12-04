@@ -3,7 +3,7 @@
 查找对象
 ========
 
-Python 在执行的过程中, 是怎么根据名字来查找变量的. 为了搞清楚这个问题, 我们写三段代码, 分别是\ :numref:`define_a_function_with_local_code`, :numref:`define_a_function_with_global_code` 和\ :numref:`define_a_function_with_closure_code`.
+Python 在执行的过程中, 是怎么根据名字来查找变量的. 为了搞清楚这个问题, 我们写三段代码, 分别是 :numref:`define_a_function_with_local_code`, :numref:`define_a_function_with_global_code` 和 :numref:`define_a_function_with_closure_code`.
 
 .. _define_a_function_with_local_code:
 
@@ -20,23 +20,23 @@ Python 在执行的过程中, 是怎么根据名字来查找变量的. 为了搞
 .. literalinclude:: /examples/object/decorator/define_a_function_with_closure.py
    :caption: ``examples/object/decorator/define_a_function_with_closure.py``
 
-这三段代码的反汇编分别是\ :numref:`define_a_function_with_local_dis`, :numref:`define_a_function_with_global_dis` 和\ :numref:`define_a_function_with_closure_dis`.
+这三段代码的反汇编分别是 :numref:`define_a_function_with_local_dis`, :numref:`define_a_function_with_global_dis` 和 :numref:`define_a_function_with_closure_dis`.
 
 .. _define_a_function_with_local_dis:
-
-.. bash:: cat examples/object/decorator/define_a_function_with_local.py | python3 -m dis
+.. python-disassembly:: /examples/object/decorator/define_a_function_with_local.py
+   :caption: ``examples/object/decorator/define_a_function_with_local.py``
 
 .. _define_a_function_with_global_dis:
-
-.. bash:: cat examples/object/decorator/define_a_function_with_global.py | python3 -m dis
+.. python-disassembly:: /examples/object/decorator/define_a_function_with_global.py
+   :caption: ``examples/object/decorator/define_a_function_with_global.py``
 
 .. _define_a_function_with_closure_dis:
+.. python-disassembly:: /examples/object/decorator/define_a_function_with_closure.py
+   :caption: ``examples/object/decorator/define_a_function_with_closure.py``
 
-.. bash:: cat examples/object/decorator/define_a_function_with_closure.py | python3 -m dis
-
-- 根据\ :numref:`define_a_function_with_local_code` 和 :numref:`define_a_function_with_local_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_FAST`.
-- 根据\ :numref:`define_a_function_with_global_code` 和 :numref:`define_a_function_with_global_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_GLOBAL`.
-- 根据\ :numref:`define_a_function_with_closure_code` 和 :numref:`define_a_function_with_closure_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_DEREF`.
+- 根据 :numref:`define_a_function_with_local_code` 和 :numref:`define_a_function_with_local_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_FAST`.
+- 根据 :numref:`define_a_function_with_global_code` 和 :numref:`define_a_function_with_global_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_GLOBAL`.
+- 根据 :numref:`define_a_function_with_closure_code` 和 :numref:`define_a_function_with_closure_dis` 可以看出, 在引用 :py:`a` 时, Python 使用的是 :py:`LOAD_DEREF`.
 
 那么问题来了, :py:`LOAD_FAST`, :py:`LOAD_GLOBAL` 和 :py:`LOAD_DEREF` 各是做什么的呢? 这个在 Python 的\ `官方文档 <https://docs.python.org/3/library/dis.html>`_\ 中是有说明的:
 
@@ -44,20 +44,19 @@ Python 在执行的过程中, 是怎么根据名字来查找变量的. 为了搞
 - :py:`LOAD_GLOBAL(namei)`: Loads the global named :py:`co_names[namei]` onto the stack.
 - :py:`LOAD_DEREF(i)`: Loads the cell contained in slot :py:`i` of the cell and free variable storage. Pushes a reference to the object the cell contains on the stack.
 
-其中 :py:`LOAD_FAST(var_num)` 和 :py:`LOAD_GLOBAL(namei)` 都很好理解, 分别是加载局部变量和加载全局变量. 我们注意到, 在\ :numref:`define_a_function_with_closure_dis` 中除了 :py:`LOAD_DEREF(i)` 还有一个特殊的操作 :py:`STORE_DEREF(i)`, 关于这个操作在 Python 的官方文档中也有说明:
+其中 :py:`LOAD_FAST(var_num)` 和 :py:`LOAD_GLOBAL(namei)` 都很好理解, 分别是加载局部变量和加载全局变量. 我们注意到, 在 :numref:`define_a_function_with_closure_dis` 中除了 :py:`LOAD_DEREF(i)` 还有一个特殊的操作 :py:`STORE_DEREF(i)`, 关于这个操作在 Python 的官方文档中也有说明:
 
 - :py:`STORE_DEREF(i)`: Stores TOS into the cell contained in slot i of the cell and free variable storage.
 
 实际上 :py:`LOAD_DEREF(i)` 和 :py:`STORE_DEREF(i)` 这两个操作就是用来实现闭包特性的.
 
-那什么时候 Python 会使用闭包呢? 为了搞清楚这个问题, 我们又写了一段代码, 如\ :numref:`load_order_code` 所示, 其反汇编代码如\ :numref:`load_order_dis` 所示.
+那什么时候 Python 会使用闭包呢? 为了搞清楚这个问题, 我们又写了一段代码, 如 :numref:`load_order_code` 所示, 其反汇编代码如 :numref:`load_order_dis` 所示.
 
 .. _load_order_code:
-
 .. literalinclude:: /examples/object/decorator/load_order.py
    :caption: ``examples/object/decorator/load_order.py``
 
-在\ :numref:`load_order_code` 第 11 行中的 4 个变量:
+在 :numref:`load_order_code` 第 11 行中的 4 个变量:
 
 - :py:`a` 只在全局被定义.
 - :py:`b` 在全局以及函数 :py:`get_function` 内部被定义.
@@ -65,10 +64,10 @@ Python 在执行的过程中, 是怎么根据名字来查找变量的. 为了搞
 - :py:`d` 在任何地方都没用被定义.
 
 .. _load_order_dis:
+.. python-disassembly:: /examples/object/decorator/load_order.py
+   :caption: ``examples/object/decorator/load_order.py``
 
-.. bash:: cat examples/object/decorator/load_order.py | python3 -m dis
-
-通过\ :numref:`load_order_dis`, 即对\ :numref:`load_order_code` 的反编译代码可以看出:
+通过 :numref:`load_order_dis`, 即对 :numref:`load_order_code` 的反编译代码可以看出:
 
 - :py:`a` 使用的是 :py:`LOAD_GLOBAL`,
 - :py:`b` 使用的是 :py:`LOAD_DEREF`,

@@ -19,35 +19,35 @@ Kinopic's Python Book
     chapters/object/all_are_objects.rst
     chapters/object/first_class_public.rst
     chapters/object/load_object.rst
-..     chapters/object/decorator.rst
-..     chapters/object/generator.rst
-..     chapters/object/functional_programming.rst
+    chapters/object/decorator.rst
+    chapters/object/generator.rst
+    chapters/object/functional_programming.rst
 
-.. .. toctree::
-..     :maxdepth: 4
-..     :caption: 面向对象
-..     :numbered:
+.. toctree::
+    :maxdepth: 4
+    :caption: 面向对象
+    :numbered:
 
-..     chapters/oop/inherit.rst
-..     chapters/oop/metaclass.rst
-..     chapters/oop/magic_methods.rst
+    chapters/oop/inherit.rst
+    chapters/oop/metaclass.rst
+    chapters/oop/magic_methods.rst
 
-.. .. toctree::
-..     :maxdepth: 4
-..     :caption: 模块导入
-..     :numbered:
+.. toctree::
+    :maxdepth: 4
+    :caption: 模块导入
+    :numbered:
 
-..     chapters/import/what_happened.rst
-..     chapters/import/lazy_import.rst
-..     chapters/import/singleton.rst
+    chapters/import/what_happened.rst
+    chapters/import/lazy_import.rst
+    chapters/import/singleton.rst
 
-.. .. toctree::
-..     :maxdepth: 4
-..     :caption: 动态特性
-..     :numbered:
+.. toctree::
+    :maxdepth: 4
+    :caption: 动态特性
+    :numbered:
 
-..     chapters/dynamic/attributes.rst
-..     chapters/dynamic/descripter.rst
+    chapters/dynamic/attributes.rst
+    chapters/dynamic/descripter.rst
 
 .. toctree::
     :maxdepth: 4

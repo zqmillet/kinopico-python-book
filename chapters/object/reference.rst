@@ -24,7 +24,8 @@
 .. _assignment_of_int_code:
 
 .. literalinclude:: /examples/object/reference/assignment_of_int_1.py
-   :caption: ``examples/object/reference/assignment_of_int_1.py``
+   :caption: ``assignment_of_int_1.py``
+   :linenos:
 
 按照我们的之前的解释, 在\ :numref:`assignment_of_int_code` 中:
 
@@ -33,16 +34,19 @@
 - 创建了一个 :py:`int` 变量 :py:`1`,
 - 给这个变量添加一个名字 :py:`b`.
 
-由于 :py:`a` 和 :py:`b` 是两个不同的对象, 因此 :py:`a` 和 :py:`b` 的地址是不同的. 所以最终的输出应该是 :py:`a is not b`. 我们执行一下\ :numref:`assignment_of_int_code`, 其输出如下所示.
+由于 :py:`a` 和 :py:`b` 是两个不同的对象, 因此 :py:`a` 和 :py:`b` 的地址是不同的. 所以最终的输出应该是 :py:`a is not b`. 我们执行一下\ :numref:`assignment_of_int_code`, 其输出如 :numref:`assignment_of_int_bash` 示.
+
+.. _assignment_of_int_bash:
 
 .. bash:: python3 examples/object/reference/assignment_of_int_1.py
+   :caption: ``assignment_of_int_1.py`` 执行结果
 
 好像哪里不对劲, 跟我们之前分析的有一些出入. 这是由于 Python 会将一些常用的整数缓存起来, 不会每次都重新构造一个新的对象. 笔者使用的 Python 版本为 |python_version|, 操作系统为 |os|, 在该版本中, 范围在 :math:`[-5, 256]` 之间的整数都会被缓存到内存中, 为了验证我们的结论, 我们将\ :numref:`assignment_of_int_code` 稍加改动, 执行结果就完全不一样了.
 
 .. _assignment_of_int_code_257:
 
 .. literalinclude:: /examples/object/reference/assignment_of_int_257.py
-   :caption: ``examples/object/reference/assignment_of_int_257.py``
+   :caption: ``assignment_of_int_257.py``
 
 我们执行一下\ :numref:`assignment_of_int_code_257`.
 
@@ -54,17 +58,11 @@
 
     a = 1
     b = 1
-    if a is b:
-        print('a is b')
-    else:
-        print('a is not b')
+    print(a is b)
 
     a = 257
     b = 257
-    if a is b:
-        print('a is b')
-    else:
-        print('a is not b')
+    print(a is b)
 
     exit()
 
@@ -73,7 +71,7 @@
 .. _change_value_code:
 
 .. literalinclude:: /examples/object/reference/change_reference_value.py
-   :caption: ``examples/object/reference/change_reference_value.py``
+   :caption: ``change_reference_value.py``
 
 由于 :py:`a` 和 :py:`b` 指向同一个对象的地址, 修改 :py:`a` 的值, 那么 :py:`b` 的值也一定会发生更改, 因此, 此时输出 :py:`b` 的值应该是 :py:`2`.
 
@@ -86,7 +84,7 @@
 .. _change_list_code:
 
 .. literalinclude:: /examples/object/reference/change_list.py
-   :caption: ``examples/object/reference/change_list.py``
+   :caption: ``change_list.py``
 
 输出结果如下所示, 有没有跟你想的不一样呢?
 
@@ -132,16 +130,15 @@
 有人要问, 你讲了这么多, 有什么证据吗? 有的, 我们通过分析 Python 字节码的反汇编就可以看出 Python 底层的运行逻辑. 以下两段代码分别是 Python 源代码以及对应的反汇编.
 
 .. literalinclude:: /examples/object/reference/assignments.py
-   :caption: ``examples/object/reference/assignments.py``
+   :caption: ``assignments.py``
    :linenos:
 
-.. bash:: cat examples/object/reference/assignments.py | python3 -m dis
+.. python-disassembly:: /examples/object/reference/assignments.py
+   :caption: ``assignments.py``
 
 其中:
 
 - :py:`LOAD_CONST` 用于构造一个整数,
-- :py:`LOAD_NAME` 用于从名字中加载对象,
-- :py:`STORE_NAME` 用于给一个对象起名字.
 
 .. admonition:: 思考题
 
